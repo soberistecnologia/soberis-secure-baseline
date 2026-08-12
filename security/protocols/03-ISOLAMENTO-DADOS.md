@@ -7,7 +7,7 @@ atualizado: 2026-07-21
 
 # ISO-03 — Isolamento e Escopo de Dados
 
-> O Lunar é **single-tenant** (um órgão). Não há schema-per-tenant como no Locus, mas **há escopo interno**: um usuário só acessa os dados do seu âmbito (unidade/centro de custo/módulo). Este protocolo corrige o **IDOR do One Nexus** (autorização que não conhecia ownership) e mantém a fundação **pronta para multi-tenant** no futuro.
+> O sistema é **single-tenant** (um órgão). Não há schema-per-tenant como no Locus, mas **há escopo interno**: um usuário só acessa os dados do seu âmbito (unidade/centro de custo/módulo). Este protocolo corrige o **IDOR do One Nexus** (autorização que não conhecia ownership) e mantém a fundação **pronta para multi-tenant** no futuro.
 
 ## 1. Princípio
 

@@ -3,7 +3,7 @@
 > Squad da **trilha imutável + governança**. Reporta ao [`00 Security Master`](../00-security-master/CHARTER.md). A integridade da trilha é **PRIORIDADE MÁXIMA** e P0 permanente.
 
 ## Missão
-Garantir que **cada "respiração"** do Lunar fique registrada numa trilha **total, append-only e imutável** (prova de accountability perante controle interno / TCU), e que os **controles de governança não-LGPD** (SoD, fluxo de aprovação, retenção, segregação de ambientes) estejam desenhados e demonstráveis.
+Garantir que **cada "respiração"** do projeto fique registrada numa trilha **total, append-only e imutável** (prova de accountability perante controle interno / TCU), e que os **controles de governança não-LGPD** (SoD, fluxo de aprovação, retenção, segregação de ambientes) estejam desenhados e demonstráveis.
 
 ## Quando acionar
 - Em **toda** mudança que toca a trilha de auditoria, `audit.Registrar`, hash-chain ou permissão de banco da tabela de log.

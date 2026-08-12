@@ -3,7 +3,7 @@
 > Squad de **hardening de infraestrutura + detecção em runtime**. Reporta ao [`00 Security Master`](../00-security-master/CHARTER.md). Hardening de infra é **gate de Go/No-Go**, não backlog.
 
 ## Missão
-Fechar a superfície de infraestrutura do Lunar (Docker Swarm, Traefik, Portainer, rede/Tailscale) e observar o sistema em execução para detectar anomalias e responder ao incidente inicial. Corrige os erros de referência: o **`:2375` sem TLS/auth** do Locus (P0 aceito informalmente) e o **hardening só no plano** do NexCollabs.
+Fechar a superfície de infraestrutura do projeto (Docker Swarm, Traefik, Portainer, rede/Tailscale) e observar o sistema em execução para detectar anomalias e responder ao incidente inicial. Corrige os erros de referência: o **`:2375` sem TLS/auth** do Locus (P0 aceito informalmente) e o **hardening só no plano** do NexCollabs.
 
 ## Quando acionar
 - Antes de **cada build/deploy** (scan de imagem, CIS, exposição de painel/daemon).

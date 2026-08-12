@@ -73,6 +73,8 @@
 - **Segredo nunca no git** — confira que `.env*` está no `.gitignore` antes de qualquer commit.
 - **Fail-closed** — na dúvida sobre um módulo de segurança, **ligue-o** (pergunte se quer desligar). O default é mais seguro, não menos.
 - **Doutrina em `docs/SECURITY-BASELINE.md`** — é a fonte da verdade das camadas.
+- **Time stack-agnostic** — leia `.claude/agents/_STACK-ADAPTIVE.md`: detecte a stack primeiro;
+  Go/Clerk/Docker/Traefik nos agentes são **exemplos de referência**, não a regra. Aplique a capacidade à stack real.
 - O mapa módulo→agente→skill→protocolo está em `baseline.config.json`.
 
 ## Se for um humano rodando à mão (fallback)

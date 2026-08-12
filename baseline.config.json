@@ -2,6 +2,7 @@
   "nome": "soberis-secure-baseline",
   "versao": "0.1.0",
   "descricao": "Base de segurança modular e ligável por pergunta. O setup filtra os módulos, os agentes e as skills conforme o tipo de projeto — nada de canhão para formiga.",
+  "capability_first": "Cada módulo declara uma CAPACIDADE universal; Docker/Traefik é UMA instância entre nginx/Caddy+systemd, K8s e PaaS. O time (.claude/agents/_STACK-ADAPTIVE.md) detecta a stack e aplica a capacidade — não assume Docker.",
 
   "tiers": {
     "formiga": "Site/landing/estático ou ferramenta interna simples. Só o mínimo inegociável.",
@@ -27,7 +28,11 @@
     "lgpd":               { "tier": "canhao",  "camada": "0 governança",  "titulo": "Conformidade LGPD: bases legais, ROPA, retenção, incidente", "deps": [],                     "agentes": ["lgpd-compliance","compliance-geral"],       "skills": ["lgpd-gov"],         "protocolos": ["09-LGPD-COMPLIANCE"], "ligar_se": "lida_com_dado_pessoal" },
 
     "dfir":               { "tier": "padrao",  "camada": "11 resposta",   "titulo": "Resposta a incidente + forense (runbook detectar→conter→preservar→erradicar→lições)", "deps": ["observabilidade"], "agentes": ["dfir-incident-response"],                   "skills": [],                   "seed": "Digital-Forensics-Guide" },
-    "ai-agent-security":  { "tier": "padrao",  "camada": "12 agente/IA",  "titulo": "Guardrails contra prompt injection + sandbox de agente + gate de skill forjada", "deps": [],                    "agentes": ["ai-agent-security"],                        "skills": [],                   "seed": "awesome-ai-security-tools", "playbook": "security/playbooks/auth-attack-defense.md" }
+    "ai-agent-security":  { "tier": "padrao",  "camada": "12 agente/IA",  "titulo": "Guardrails contra prompt injection + sandbox de agente + gate de skill forjada", "deps": [],                    "agentes": ["ai-agent-security"],                        "skills": [],                   "seed": "awesome-ai-security-tools", "playbook": "security/playbooks/auth-attack-defense.md" },
+
+    "backup-dr":          { "tier": "padrao",  "camada": "7 dados",       "titulo": "Backup cifrado + DRILL de restauração testado + chave offsite (anti-ransomware/perda)", "deps": [],              "agentes": ["infra-hardening","dfir-incident-response"], "skills": ["infra-hardening"],  "protocolos": ["08-INFRA-HARDENING"] },
+    "dns":                { "tier": "padrao",  "camada": "1 rede",        "titulo": "CAA + registrar-lock + DNSSEC + varredura de CNAME órfão (anti-subdomain-takeover)", "deps": [],                "agentes": ["infra-hardening"],                          "skills": [],                   "protocolos": ["08-INFRA-HARDENING"] },
+    "borda-cdn-waf":      { "tier": "canhao",  "camada": "2 borda",       "titulo": "CDN/WAF na frente — absorve DDoS VOLUMÉTRICO (o que middleware de borda não para); casar com trustedIPs", "deps": ["borda-traefik"], "agentes": ["infra-hardening"],                          "skills": ["infra-hardening"],  "protocolos": ["08-INFRA-HARDENING"], "ligar_se": "exposto_a_internet" }
   },
 
   "sempre": {
@@ -63,8 +68,8 @@
 
   "presets": {
     "formiga": { "modulos": ["perimetro","borda-traefik","secrets","container-hardening"] },
-    "padrao":  { "herda": "formiga", "modulos": ["auth","rbac-ownership","banco-minimo","observabilidade","dfir","ai-agent-security"] },
-    "canhao":  { "herda": "padrao",  "modulos": ["auditoria","stepup-2fa","rbac-granular","integridade-financeira","lgpd"], "auditoria_nivel": "hash-chain" }
+    "padrao":  { "herda": "formiga", "modulos": ["auth","rbac-ownership","banco-minimo","observabilidade","dfir","ai-agent-security","backup-dr","dns"] },
+    "canhao":  { "herda": "padrao",  "modulos": ["auditoria","stepup-2fa","rbac-granular","integridade-financeira","lgpd","borda-cdn-waf"], "auditoria_nivel": "hash-chain" }
   },
 
   "perguntas": [
@@ -75,7 +80,8 @@
     { "id": "auditoria_nivel","texto": "Precisa de trilha de auditoria?",          "so_se": "custom", "tipo": "escolha", "opcoes": ["não","log-app","append-only","hash-chain"] },
     { "id": "lida_com_dinheiro","texto": "O sistema mexe com dinheiro/valores?",   "tipo": "sim_nao", "liga": ["integridade-financeira"] },
     { "id": "lida_com_dado_pessoal","texto": "Guarda dado pessoal (LGPD)?",        "tipo": "sim_nao", "liga": ["lgpd"] },
-    { "id": "deploy",        "texto": "Como faz deploy?",                          "tipo": "escolha", "opcoes": ["Docker Compose (1 nó)","Docker Swarm (multi-nó)"] },
+    { "id": "deploy",        "texto": "Como faz deploy?",                          "tipo": "escolha", "opcoes": ["Docker Compose (1 nó)","Docker Swarm (multi-nó)","VPS pura (systemd + nginx/Caddy)","Kubernetes","PaaS (Vercel/Railway/Fly)"] },
+    { "id": "exposto_a_internet","texto": "É exposto direto à internet pública?",   "tipo": "sim_nao", "liga": ["borda-cdn-waf"] },
     { "id": "quer_agentes",  "texto": "Trazer o time de agentes de segurança junto (.claude/agents + skills)?", "tipo": "sim_nao", "padrao": "sim" }
   ],
 

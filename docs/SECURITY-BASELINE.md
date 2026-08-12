@@ -5,6 +5,8 @@
 ## Modelo mental
 **Defesa em profundidade + fail-closed.** Toda rota valida 3 coisas: *quem é* (auth) → *pode?* (authz) → *pode ESSE dado?* (ownership/escopo). Na dúvida, **nega**. A segurança é **estrutural** (o compilador e o `WHERE` cobram; o boot aborta sem config), não "disciplina de lembrar".
 
+> **Capability-first (stack-agnostic).** Cada linha abaixo é uma **capacidade universal**. As ferramentas (Traefik, Docker, Postgres, Clerk) são **uma instância** — em VPS pura é nginx/Caddy+systemd, em K8s é `securityContext`/NetworkPolicy/admission, em PaaS é o secret store + WAF da plataforma. O time detecta a stack e aplica a capacidade (`.claude/agents/_STACK-ADAPTIVE.md`).
+
 ## As 11 camadas
 
 | # | Camada | Software | Regra-chave |
@@ -38,6 +40,8 @@
 - [ ] `MaxBytesReader`/limite de corpo; rejeita campo JSON desconhecido; paginação com teto
 - [ ] Role de banco sem SUPERUSER; `REVOKE DELETE, TRUNCATE` se usa soft-delete
 - [ ] **Logs JSON com request_id + alerta** em 5xx / falha de auth / 429  ← não deixe pra depois
+- [ ] **Backup cifrado + DRILL de restauração testado** + chave offsite (anti-ransomware/perda; backup que nunca foi restaurado não existe)
+- [ ] **DNS**: CAA + registrar-lock; varredura de **CNAME órfão** (anti-subdomain-takeover)
 
 ### 🔴 TIER 3 — grau-governo/financeiro
 - [ ] Auditoria hash-chain (PG dedicado, outbox na mesma transação)
@@ -45,6 +49,7 @@
 - [ ] RBAC granular dinâmico (deny-vence)
 - [ ] Dinheiro int64 centavos + validação cruzada por 2º agente
 - [ ] LGPD (bases legais, ROPA, retenção, resposta a incidente)
+- [ ] **CDN/WAF na frente** (se exposto à internet) — absorve **DDoS volumétrico**, que o middleware de borda não para
 
 ## 5 armadilhas comuns que este baseline JÁ corrige
 1. **Observabilidade zero** → módulo `observabilidade` (logs+alerta) já em Tier 2.

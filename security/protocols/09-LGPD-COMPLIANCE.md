@@ -10,9 +10,9 @@ atualizado: 2026-07-21
 
 # LGPD-09 — Conformidade LGPD (Setor Público)
 
-> O Lunar é sistema de um **órgão governamental** → LGPD com **regime do Poder Público** (Cap. IV). Este protocolo fixa a postura de conformidade; o detalhe verificado e citado está em [`../../.claude/skills/lgpd-gov/references/base-lgpd-setor-publico.md`](../../.claude/skills/lgpd-gov/references/base-lgpd-setor-publico.md). Ao trabalhar com dado pessoal, **use a skill `lgpd-gov`**.
+> O sistema é sistema de um **órgão governamental** → LGPD com **regime do Poder Público** (Cap. IV). Este protocolo fixa a postura de conformidade; o detalhe verificado e citado está em [`../../.claude/skills/lgpd-gov/references/base-lgpd-setor-publico.md`](../../.claude/skills/lgpd-gov/references/base-lgpd-setor-publico.md). Ao trabalhar com dado pessoal, **use a skill `lgpd-gov`**.
 
-## 1. Postura de conformidade do Lunar
+## 1. Postura de conformidade do projeto
 
 1. **Base legal:** todo tratamento se ancora em **obrigação legal (art. 7º,II)** ou **política pública/uso compartilhado (art. 7º,III)** + **finalidade/interesse público (art. 23)**. **Não** implementar fluxo de "consentimento" como base para tratamento compulsório.
 2. **Minimização (art. 6):** coletar só o necessário; nunca PII sensível excessiva em logs; redação de dado sensível na trilha conforme [`02-AUDITORIA-LOGS.md`](02-AUDITORIA-LOGS.md).
@@ -25,7 +25,7 @@ atualizado: 2026-07-21
 Fluxo obrigatório quando houver incidente com dados pessoais:
 
 1. **Detectar & conter** (Squad InfraSec/Runtime + Security Master).
-2. **Avaliar o limiar (art. 5 da Res. 15/2024):** afeta significativamente direitos **E** envolve ≥1 de: dados sensíveis, de crianças/adolescentes/idosos, financeiros, de autenticação, sob sigilo, ou em larga escala? *(Dados financeiros e de autenticação são o caso típico do Lunar.)* Criptografia é atenuante, **não** isenção.
+2. **Avaliar o limiar (art. 5 da Res. 15/2024):** afeta significativamente direitos **E** envolve ≥1 de: dados sensíveis, de crianças/adolescentes/idosos, financeiros, de autenticação, sob sigilo, ou em larga escala? *(Dados financeiros e de autenticação são o caso típico do projeto.)* Criptografia é atenuante, **não** isenção.
 3. **Se aciona:** comunicar à **ANPD em 3 dias úteis** do conhecimento (art. 6; 6 d.ú. se pequeno porte), via **formulário eletrônico** com os **12 itens**; **comunicação preliminar** admite complementação em **20 dias úteis**.
 4. **Comunicar o titular** (art. 9): linguagem simples, individualizada quando possível; se inviável, divulgação pública ≥ 3 meses.
 5. **Registrar o incidente e guardar por 5 anos.**

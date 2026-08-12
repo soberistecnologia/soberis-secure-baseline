@@ -1,10 +1,10 @@
 # CHARTER — Squad 10 · LGPD (Conformidade no Setor Público)
 
-> Guardião da conformidade com a **Lei Geral de Proteção de Dados** no Projeto Lunar, sob o **regime do Poder Público** (Capítulo IV da LGPD). Parte da camada de segurança/compliance — **poder de veto** (fail-closed) sobre tratamento de dado pessoal em desacordo com a lei.
+> Guardião da conformidade com a **Lei Geral de Proteção de Dados** no projeto, sob o **regime do Poder Público** (Capítulo IV da LGPD). Parte da camada de segurança/compliance — **poder de veto** (fail-closed) sobre tratamento de dado pessoal em desacordo com a lei.
 
 ## Missão
 
-Garantir que **todo tratamento de dado pessoal** no Lunar tenha **base legal correta**, esteja **registrado (ROPA)**, respeite **minimização e direitos do titular**, e que o sistema esteja **pronto para responder a incidente** conforme a Res. CD/ANPD 15/2024 — sem jamais afirmar conformidade além do que foi verificado.
+Garantir que **todo tratamento de dado pessoal** em produção tenha **base legal correta**, esteja **registrado (ROPA)**, respeite **minimização e direitos do titular**, e que o sistema esteja **pronto para responder a incidente** conforme a Res. CD/ANPD 15/2024 — sem jamais afirmar conformidade além do que foi verificado.
 
 ## Quando acionar
 

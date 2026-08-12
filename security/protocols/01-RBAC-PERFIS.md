@@ -9,7 +9,7 @@ atualizado: 2026-07-24
 
 # RBAC-01 — Perfis de Usuário e Controle de Acesso
 
-> **Foco da Fase 1.** Traduz o requisito do cliente (`Docs_dev/Perfil de Usuário.docx`) no modelo de autorização do Lunar. Herda o RBAC ultragranular do Locus e corrige o IDOR do One Nexus (autorização conhece **escopo/ownership**, não só a string da permissão).
+> **Foco da Fase 1.** Traduz o requisito do cliente (`Docs_dev/Perfil de Usuário.docx`) no modelo de autorização do projeto. Herda o RBAC ultragranular do Locus e corrige o IDOR do One Nexus (autorização conhece **escopo/ownership**, não só a string da permissão).
 
 ## 1. Modelo de permissão
 
@@ -64,7 +64,7 @@ Como o Assessor Especial **edita dados E administra acesso**, aplicam-se travas 
      aprovar registro) — por isso as travas 2, 3 e 4 desta seção existem.
 
    **Por que global e não por módulo** (decisão D5, `security-master` + `sec-isolamento-acesso`,
-   2026-07-24): os módulos do Lunar — contratos → compras → empenhos → pagamentos → prestação de
+   2026-07-24): os módulos do projeto — contratos → compras → empenhos → pagamentos → prestação de
    contas — são **etapas da mesma cadeia de despesa**. Quem edita o empenho e aprova o pagamento
    fechou o ciclo sozinho: um SoD por módulo **autorizaria exatamente essa fraude**. Global é, além
    de mais restritivo (fail-closed, PRIN-00 §1), o comportamento **correto** para este domínio.
@@ -163,10 +163,10 @@ Requisito explícito: **criar novos perfis sem código**. Portanto:
 
 ## 5. Autenticação (Clerk) + 2FA para aprovadores
 
-- Identidade via **Clerk** (ver [`04-AUTH-CLERK.md`](04-AUTH-CLERK.md)). O papel/perfil do Lunar vive no **nosso** RBAC, não no Clerk (Clerk autentica, Lunar autoriza).
+- Identidade via **Clerk** (ver [`04-AUTH-CLERK.md`](04-AUTH-CLERK.md)). O papel/perfil do projeto vive no **nosso** RBAC, não no Clerk (Clerk autentica, a aplicação autoriza).
 - **2FA obrigatório para perfis aprovadores** (Diretor-Presidente e Diretor Financeiro) **no login** — requisito do cliente ("autenticação em dois fatores para perfis de aprovação").
 - ⚠️ **Assinatura de aprovação (correção 2026-07-24):** cada aprovação exige **assinatura de step-up
-  própria do Lunar** — **não** o 2FA do Clerk. **WebAuthn/FIDO2 assina o `payload_hash`** do ato
+  própria do projeto** — **não** o 2FA do Clerk. **WebAuthn/FIDO2 assina o `payload_hash`** do ato
   (prova o valor exato, chave privada nunca sai do autenticador); TOTP é **tier fraco**, só abaixo
   do limite dual-control e só para quem não tem WebAuthn. Ver [`06-FLUXO-APROVACAO.md`](06-FLUXO-APROVACAO.md) §2.
 - **SoD por capacidade (fail-closed) — alcance GLOBAL:** quem tem `aprovar` em **qualquer** módulo

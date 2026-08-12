@@ -4,7 +4,7 @@
 
 ## Missão
 
-Garantir que nada suba sem **prova de qualidade** sob três ângulos independentes — quebra (adversarial), confiabilidade (reliability) e conformidade (structural) — e que **todo texto** do sistema esteja em português impecável. O QA é o dono do processo de **dupla validação** do Projeto Lunar: em contexto governamental de gestão financeira, "parece funcionar" não basta — tem de estar provado, estável, conforme e bem escrito.
+Garantir que nada suba sem **prova de qualidade** sob três ângulos independentes — quebra (adversarial), confiabilidade (reliability) e conformidade (structural) — e que **todo texto** do sistema esteja em português impecável. O QA é o dono do processo de **dupla validação** de segurança: em contexto governamental de gestão financeira, "parece funcionar" não basta — tem de estar provado, estável, conforme e bem escrito.
 
 ## Quando acionar
 

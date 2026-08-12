@@ -7,7 +7,7 @@ atualizado: 2026-07-21
 
 # AUTH-04 — Autenticação (Clerk)
 
-> **Clerk autentica; o Lunar autoriza.** A identidade vem do Clerk; o **perfil/permissões** vivem no nosso RBAC ([`01-RBAC-PERFIS.md`](01-RBAC-PERFIS.md)), não no Clerk. Este protocolo corrige os erros de auth mapeados no One Nexus e no Locus.
+> **Clerk autentica; o sistema autoriza.** A identidade vem do Clerk; o **perfil/permissões** vivem no nosso RBAC ([`01-RBAC-PERFIS.md`](01-RBAC-PERFIS.md)), não no Clerk. Este protocolo corrige os erros de auth mapeados no One Nexus e no Locus.
 
 ## 1. Validação de token (correções dos erros mapeados)
 
@@ -23,7 +23,7 @@ atualizado: 2026-07-21
 - **2FA obrigatório para perfis aprovadores** (Diretor-Presidente, Diretor Financeiro) — no **login**.
 - ⚠️ **Correção 2026-07-24 — o step-up de aprovação NÃO é o 2FA do Clerk.** O Clerk é **só
   login/identidade** (sessão reautenticada, JWT via JWKS, `iss`/`aud`/`azp` validados). A
-  **assinatura do ato de aprovação é mecanismo próprio** do Lunar, em `internal/security`
+  **assinatura do ato de aprovação é mecanismo próprio** do projeto, em `internal/security`
   (**WebAuthn/FIDO2** assinando o `payload_hash`; TOTP só como tier fraco limitado por valor).
   A identidade do ato continua sendo a sessão Clerk (`clerk_user_id`), ligada ao mesmo `user_id`
   que o RBAC reconhece como aprovador. Spec completa em
@@ -31,7 +31,7 @@ atualizado: 2026-07-21
 
 ## 3. Provisionamento & papéis
 
-- Cargo inicial do Lunar semeado a partir do papel do Clerk, mas a **fonte de verdade de autorização é o RBAC do Lunar**.
+- Cargo inicial do projeto semeado a partir do papel do Clerk, mas a **fonte de verdade de autorização é o RBAC do projeto**.
 - Toda criação/alteração de usuário via webhook Clerk é **auditada** ([`02-AUDITORIA-LOGS.md`](02-AUDITORIA-LOGS.md)).
 
 ## 4. Segredos

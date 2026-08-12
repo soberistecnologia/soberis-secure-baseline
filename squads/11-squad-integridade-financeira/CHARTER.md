@@ -1,10 +1,10 @@
 # CHARTER — Squad 11 · Integridade Financeira
 
-> ⭐ Guardião do **ZERO erro de cálculo** do Projeto Lunar. O sistema movimenta **recurso público** — um erro de cálculo é potencial **dano ao erário**. Este squad é o **Validador obrigatório** de tudo que toca dinheiro e tem **poder de veto** (fail-closed) sobre qualquer cálculo financeiro.
+> ⭐ Guardião do **ZERO erro de cálculo** de segurança. O sistema movimenta **recurso público** — um erro de cálculo é potencial **dano ao erário**. Este squad é o **Validador obrigatório** de tudo que toca dinheiro e tem **poder de veto** (fail-closed) sobre qualquer cálculo financeiro.
 
 ## Missão
 
-Assegurar **integridade financeira absoluta**: nenhum valor calculado, somado, arredondado, rateado ou conciliado no Lunar pode estar errado — **nem por um centavo**. Toda operação monetária usa precisão fixa, fonte única de cálculo, testes rigorosos e **validação cruzada por recálculo independente** antes de persistir ou exibir.
+Assegurar **integridade financeira absoluta**: nenhum valor calculado, somado, arredondado, rateado ou conciliado em produção pode estar errado — **nem por um centavo**. Toda operação monetária usa precisão fixa, fonte única de cálculo, testes rigorosos e **validação cruzada por recálculo independente** antes de persistir ou exibir.
 
 ## Quando acionar
 

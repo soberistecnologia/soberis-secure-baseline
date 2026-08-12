@@ -3,7 +3,7 @@
 > Squad orquestrador da **Camada 0**. Tem **precedência e poder de veto** (fail-closed) sobre todos os demais squads. Ver [`_squads/README.md`](../README.md) e [`security/protocols/00-PRINCIPIOS-CAMADA-0.md`](../../security/protocols/00-PRINCIPIOS-CAMADA-0.md).
 
 ## Missão
-Orquestrar a segurança do Lunar: consolidar os achados de todos os agentes de segurança, fazer a triagem P0-P3, decidir o tier de autonomia de cada achado (auto-safe / auto-veto / humano-obrigatório) e dar o veredito **Go/No-Go** de qualquer deploy. Ser o dono do gate de segurança.
+Orquestrar a segurança do projeto: consolidar os achados de todos os agentes de segurança, fazer a triagem P0-P3, decidir o tier de autonomia de cada achado (auto-safe / auto-veto / humano-obrigatório) e dar o veredito **Go/No-Go** de qualquer deploy. Ser o dono do gate de segurança.
 
 ## Quando acionar
 - Antes de **qualquer deploy público** (gate Go/No-Go obrigatório).

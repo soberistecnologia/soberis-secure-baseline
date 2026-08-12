@@ -1,6 +1,6 @@
-# Squads do Projeto Lunar — Organograma
+# Squads de segurança — Organograma
 
-> Os agentes que constroem e defendem o Lunar. Cada squad tem **CHARTER** (aqui), **agente(s) funcional(is)** em [`.claude/agents/`](../.claude/agents/) e, quando há conhecimento especializado, **skill(s)** em [`.claude/skills/`](../.claude/skills/).
+> Os agentes que constroem e defendem o sistema. Cada squad tem **CHARTER** (aqui), **agente(s) funcional(is)** em [`.claude/agents/`](../.claude/agents/) e, quando há conhecimento especializado, **skill(s)** em [`.claude/skills/`](../.claude/skills/).
 > **Precedência:** squads de **segurança têm poder de veto** (fail-closed). Nada conclui sem **dupla validação** (Executor + Validador) — ver [`security/protocols/12-DUPLA-VALIDACAO-E-INTEGRIDADE.md`](../security/protocols/12-DUPLA-VALIDACAO-E-INTEGRIDADE.md).
 
 ## Organograma

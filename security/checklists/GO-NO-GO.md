@@ -1,4 +1,4 @@
-# Checklist Go / No-Go — Deploy do Lunar
+# Checklist Go / No-Go — Deploy do projeto
 
 > Nenhum deploy **público** sem este checklist 100%. Squads de segurança têm **veto**. Um item aberto P0/P1 = **No-Go**.
 

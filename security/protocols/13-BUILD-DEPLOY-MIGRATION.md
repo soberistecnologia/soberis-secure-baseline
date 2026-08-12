@@ -2,13 +2,13 @@
 protocolo: BDM-13
 titulo: Build, Deploy e Migration — Caderno de Regras Operacional
 status: rascunho (a validar — devops-swarm + security-master + Magdiel)
-origem: processo REAL do One Nexus (extraído do código + vault, jul/2026), adaptado ao Lunar (Go/Swarm/gov)
+origem: processo REAL do One Nexus (extraído do código + vault, jul/2026), adaptado ao sistema (Go/Swarm/gov)
 atualizado: 2026-07-24
 ---
 
 # BDM-13 — Build, Deploy e Migration (caderno de regras)
 
-> **Herda o processo comprovado do One Nexus** (mesmo dono), adaptado ao Lunar (backend **Go**, Docker Swarm, órgão público). Cada regra aqui nasceu de um **incidente real** — não são preferências, são travas pra **não quebrar o sistema nem subir código sujo em produção de dinheiro público**. Complementa [`08-INFRA-HARDENING`](08-INFRA-HARDENING.md), [`05-GESTAO-SEGREDOS`](05-GESTAO-SEGREDOS.md), [`02-AUDITORIA-LOGS`](02-AUDITORIA-LOGS.md) e o gate [`../checklists/GO-NO-GO.md`](../checklists/GO-NO-GO.md).
+> **Herda o processo comprovado do One Nexus** (mesmo dono), adaptado ao sistema (backend **Go**, Docker Swarm, órgão público). Cada regra aqui nasceu de um **incidente real** — não são preferências, são travas pra **não quebrar o sistema nem subir código sujo em produção de dinheiro público**. Complementa [`08-INFRA-HARDENING`](08-INFRA-HARDENING.md), [`05-GESTAO-SEGREDOS`](05-GESTAO-SEGREDOS.md), [`02-AUDITORIA-LOGS`](02-AUDITORIA-LOGS.md) e o gate [`../checklists/GO-NO-GO.md`](../checklists/GO-NO-GO.md).
 >
 > **Sem GitHub.** O deploy é **manual via SSH + scripts na VPS** — build local + `docker service update`. Nada de CI/CD, nada de push de imagem. (Confirmado: o One Nexus não tem `.github/workflows/` nem `git push` em nenhum script; git-tag, quando usado, é manual.)
 
@@ -49,7 +49,7 @@ atualizado: 2026-07-24
 ## 4. Migration
 
 - **Idempotente sempre:** `CREATE TABLE IF NOT EXISTS`, `CREATE INDEX IF NOT EXISTS`, `DO $$ ... EXCEPTION WHEN duplicate_object`. Arquivos `.sql` numerados e versionados.
-- **Roda MANUALMENTE no Postgres MASTER (VPS de dados), NÃO pela app**, via `ssh + docker exec ... psql`. *(No Lunar, respeitar a arquitetura CQRS: escrita autoritativa no MASTER; a base de **auditoria** é dedicada/só-INSERT — migration nela é raríssima e sob dupla revisão, [`02-AUDITORIA-LOGS`](02-AUDITORIA-LOGS.md).)*
+- **Roda MANUALMENTE no Postgres MASTER (VPS de dados), NÃO pela app**, via `ssh + docker exec ... psql`. *(No sistema, respeitar a arquitetura CQRS: escrita autoritativa no MASTER; a base de **auditoria** é dedicada/só-INSERT — migration nela é raríssima e sob dupla revisão, [`02-AUDITORIA-LOGS`](02-AUDITORIA-LOGS.md).)*
 - **Ordem: migration PRIMEIRO, depois build+deploy do backend.**
 - **Verificação OBRIGATÓRIA:** conferir o estado **ANTES** (`SELECT to_regclass(...)`) e **DEPOIS** (`\d tabela` + `SELECT COUNT(*)`). **Backup do PG antes.** Migration que não foi verificada antes+depois **não passou**.
 - **Rollback de DB é separado e por último** (`DROP` só se necessário, com backup na mão).
@@ -82,9 +82,9 @@ atualizado: 2026-07-24
 - **Sandbox → produção = scp/rsync do código-fonte + rebuild em prod** (nunca "mover a imagem de staging pra prod"). Cherry-pick manual dos arquivos.
 - Git-tag, se usado, é **manual e opcional** — não faz parte do fluxo de deploy.
 
-## 9. Diferenças que o Lunar herda mas endurece (vs One Nexus)
+## 9. Diferenças que o sistema herda mas endurece (vs One Nexus)
 
-| One Nexus | Lunar (mais rígido) |
+| exemplo permissivo | este baseline (mais rígido) |
 |---|---|
 | Confirmação de encerrar sessão foi relaxada | Mantém: **build/deploy/migration sempre com autorização explícita** (é dinheiro público) |
 | Réplicas divergentes compose×vivo | Compose = fonte da verdade **sincronizada** pós-deploy (rule §5) |

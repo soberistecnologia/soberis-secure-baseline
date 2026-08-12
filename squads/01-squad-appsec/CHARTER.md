@@ -3,7 +3,7 @@
 > Squad de **segurança de aplicação** (backend Go). Reporta ao [`00 Security Master`](../00-security-master/CHARTER.md). Precedência de segurança / poder de veto (fail-closed).
 
 ## Missão
-Garantir que o código de aplicação do Lunar seja seguro em **quatro frentes**: injeção e higiene de código Go, isolamento/controle de acesso (anti-IDOR), autenticação/webhooks (Clerk) e gestão de segredos. É a linha de frente contra os erros que derrubaram os sistemas de referência (IDOR do One Nexus, segredos expostos do Locus, ausência de MFA do NexCollabs).
+Garantir que o código de aplicação do projeto seja seguro em **quatro frentes**: injeção e higiene de código Go, isolamento/controle de acesso (anti-IDOR), autenticação/webhooks (Clerk) e gestão de segredos. É a linha de frente contra os erros que derrubaram os sistemas de referência (IDOR do One Nexus, segredos expostos do Locus, ausência de MFA do NexCollabs).
 
 ## Quando acionar
 - Em **todo PR/diff** que toca o backend Go, rota, auth, RBAC, escopo de dado ou segredo.

@@ -1,10 +1,10 @@
 ---
-titulo: Modelo de Ameaça — Projeto Lunar
+titulo: Modelo de Ameaça — projeto
 status: vivo
 atualizado: 2026-07-21
 ---
 
-# Modelo de Ameaça — Projeto Lunar
+# Modelo de Ameaça — projeto
 
 > Sistema de gestão financeira de **órgão público**. Ativos = dados pessoais de servidores/fornecedores + movimentação de recursos públicos + trilha de auditoria. Atacante de interesse elevado (fraude ao erário, vazamento, adulteração de registro). Metodologia: STRIDE + lições dos 3 sistemas de referência.
 

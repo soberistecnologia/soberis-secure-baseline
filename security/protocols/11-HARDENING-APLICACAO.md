@@ -8,9 +8,9 @@ atualizado: 2026-07-21
 
 # HARD-11 — Hardening de Aplicação (Camadas Extras)
 
-> Requisito do dono: **replicar as proteções aplicadas no NexCollabs** (Argon2, e demais) como **proteções extras** do Lunar. O NexCollabs foi o sistema com a melhor engenharia de segurança de *aplicação* dos três (ver [`../../\_reconhecimento/03-NEXCOLLABS.md`](../../_reconhecimento/03-NEXCOLLABS.md) §2). Aqui ficam as camadas a portar para Go.
+> Requisito do dono: **replicar as proteções aplicadas no NexCollabs** (Argon2, e demais) como **proteções extras** do projeto. O NexCollabs foi o sistema com a melhor engenharia de segurança de *aplicação* dos três (ver [`../../\_reconhecimento/03-NEXCOLLABS.md`](../../_reconhecimento/03-NEXCOLLABS.md) §2). Aqui ficam as camadas a portar para Go.
 >
-> **Nota:** o Lunar autentica via **Clerk**. Argon2id/sessão própria valem para **qualquer credencial local** que o sistema guarde (ex.: senha de assinatura/aprovação, PIN, credenciais de serviço, segredos cifrados em repouso) e como padrão de referência de crypto. Onde o Clerk cobre, usamos Clerk; onde guardarmos segredo/credencial nós mesmos, usamos estas camadas.
+> **Nota:** o sistema autentica via **Clerk**. Argon2id/sessão própria valem para **qualquer credencial local** que o sistema guarde (ex.: senha de assinatura/aprovação, PIN, credenciais de serviço, segredos cifrados em repouso) e como padrão de referência de crypto. Onde o Clerk cobre, usamos Clerk; onde guardarmos segredo/credencial nós mesmos, usamos estas camadas.
 
 ## 1. Criptografia de credenciais/segredos em repouso
 

@@ -1,6 +1,6 @@
 ---
 name: dfir-incident-response
-description: Especialista em forense digital e resposta a incidente (DFIR) — o "depois que fui atacado". Aciona para desenhar/executar o runbook de resposta a incidente (detectar→conter→preservar→erradicar→recuperar→lições), forense de memória/disco/rede/mobile/DB, cadeia de custódia de evidência e triagem de comprometimento. Preenche o buraco nº 1 do Lunar (não havia runbook de IR). Stack-agnostic: forense é nível de SO/rede, não de linguagem. NÃO é detecção em runtime (é do runtime-detection, que dispara o alerta) nem a trilha imutável (é do auditoria-logs, a prova).
+description: Especialista em forense digital e resposta a incidente (DFIR) — o "depois que fui atacado". Aciona para desenhar/executar o runbook de resposta a incidente (detectar→conter→preservar→erradicar→recuperar→lições), forense de memória/disco/rede/mobile/DB, cadeia de custódia de evidência e triagem de comprometimento. Preenche o buraco nº 1 do projeto (não havia runbook de IR). Stack-agnostic: forense é nível de SO/rede, não de linguagem. NÃO é detecção em runtime (é do runtime-detection, que dispara o alerta) nem a trilha imutável (é do auditoria-logs, a prova).
 model: opus
 ---
 
