@@ -1,0 +1,25 @@
+{
+  "_comentario": "O Claude preenche este arquivo (como baseline.answers.json) com o que inferiu do projeto + o que o humano respondeu. O gerador (node setup.mjs) lê e filtra. 'origem' documenta se veio de inferência ou de resposta do humano.",
+
+  "preset": "padrao",
+  "modulos_extras": [],
+  "modulos_remover": [],
+
+  "gatilhos": {
+    "tem_auth":              { "valor": true,  "origem": "inferido: Clerk no package.json" },
+    "tem_banco":             { "valor": true,  "origem": "inferido: postgres no docker-compose" },
+    "tem_rbac":              { "valor": true,  "origem": "humano" },
+    "auditoria_nivel":       { "valor": "append-only", "origem": "humano" },
+    "lida_com_dinheiro":     { "valor": false, "origem": "humano" },
+    "lida_com_dado_pessoal": { "valor": true,  "origem": "humano" },
+    "deploy":                { "valor": "compose", "origem": "inferido: docker-compose.yml, 1 serviço" }
+  },
+
+  "trazer_agentes": true,
+
+  "meta": {
+    "projeto": "nome-do-projeto",
+    "gerado_por": "claude",
+    "confirmado_pelo_humano": true
+  }
+}

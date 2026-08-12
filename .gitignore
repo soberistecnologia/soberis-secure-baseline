@@ -1,0 +1,34 @@
+# === Segredos — regra nº 1: nunca no git ===
+.env
+.env.*
+!.env.example
+*Credenciais*
+*credentials*
+*.key
+*.pem
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+*.age
+secrets/
+.lunar-secrets/
+.soberis-secrets/
+
+# === Estado de runtime (nunca no artefato de deploy) ===
+.data/
+*.db
+*.sqlite
+*.tar.gz
+*.zip
+
+# === Dependências / build ===
+node_modules/
+dist/
+build/
+*.log
+
+# === Artefatos de scan (contêm segredos após rodar) ===
+gitleaks-report.json
+trivy-report.json
+gl-*.json
