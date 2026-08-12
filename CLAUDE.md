@@ -51,8 +51,15 @@
    (apaga `setup.mjs`, `presets/`, `baseline.config.json`, este `CLAUDE.md` e o `answers.json`),
    deixando só o projeto configurado.
 
-6. **RELATE** ao humano: o que foi ligado, o time de agentes que ficou, quais **skills foram
-   forjadas** (e a procedência), e o `CHECKLIST-PR.md` como gate. Rode `git status`.
+6. **ISOLE a camada de segurança** — rode `/security-layer`. Tudo de segurança fica numa pasta
+   `security/` própria, **separada do código da app**: histórico append-only (`CHANGELOG-SECURITY.md`),
+   testes de segurança em suíte separada (`security/tests/`), auditorias/reviews datadas
+   (`security/reviews/`, `relatorios/`). Registre a adoção do baseline no `CHANGELOG-SECURITY.md`.
+   Nenhum artefato de segurança pode ficar espalhado na árvore da app.
+
+7. **RELATE** ao humano: o que foi ligado, o time de agentes que ficou, quais **skills foram
+   forjadas** (e a procedência), a **camada `security/` isolada** que foi criada, e o
+   `CHECKLIST-PR.md` como gate. Rode `git status`.
 
 ## Regras que você aplica ao configurar
 - **Segredo nunca no git** — confira que `.env*` está no `.gitignore` antes de qualquer commit.
