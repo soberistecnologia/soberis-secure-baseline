@@ -2,7 +2,7 @@
 
 Base de segurança **modular e ligável por pergunta** para começar qualquer projeto da Soberis já com a Camada 0 de pé — sem virar *canhão para matar formiga* 🐜.
 
-Destilado do sistema **Lunar** (gestão financeira governamental, auditado e testado com carga real), com os **erros já corrigidos** de saída (observabilidade dia 1, segredo nunca em disco, backstop anti-DDoS global).
+Validada em produção real (auditoria + pentest com carga real), com as **armadilhas comuns já corrigidas** de saída: observabilidade dia 1, segredo nunca em disco, e **backstop de concorrência** global na borda.
 
 ---
 
@@ -38,7 +38,7 @@ só do time filtrado · `SECURITY-BASELINE.md` sob medida · `CHECKLIST-PR.md` (
 | `baseline.config.json` | O **cérebro do filtro** — módulos, tiers, presets, e qual agente/skill cada módulo puxa |
 | `modules/` | Cada camada de segurança como **módulo independente** (compose + config + middleware + migration + doc) |
 | `presets/` | 🐜 `formiga` · 🔧 `padrao` · 💥 `canhao` |
-| `.claude/agents/` | O **time de agentes de segurança** (security-master + 11 especialistas) |
+| `.claude/agents/` | O **time de agentes de segurança** (security-master + 13 especialistas) |
 | `.claude/skills/` | Skills na ponta da língua (appsec-go, go-reference, infra-hardening, lgpd-gov) |
 | `squads/` | Charters dos squads (missão, quando acionar) |
 | `security/protocols/` | A **doutrina** — 13 protocolos (RBAC, auditoria, segredos, hardening…) |
@@ -57,4 +57,4 @@ só do time filtrado · `SECURITY-BASELINE.md` sob medida · `CHECKLIST-PR.md` (
 3. **Toda rota** valida auth **e** authz **e** escopo de dado.
 4. **Dupla validação** — Executor + Validador independentes.
 
-> ⚠️ **Este repo pratica o que ensina:** `.env*` e chaves estão no `.gitignore`, o CI roda `gitleaks`, e nenhum segredo mora aqui. Se você colocar um token no `.env.local`, ele **não** vai pro git — mas trate-o como o que é: um segredo.
+> ⚠️ **Este repo pratica o que ensina:** `.env*` e chaves estão no `.gitignore` e nenhum segredo mora aqui. O setup **gera** o CI (`gitleaks`+`trivy`) no projeto-alvo (v0.2). Se você colocar um token no `.env`/`.env.local`, ele **não** vai pro git — mas trate-o como o que é: um segredo.

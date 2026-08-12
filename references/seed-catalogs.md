@@ -24,7 +24,7 @@
 ### 2. BruteForceAI — `github.com/MorDavid/BruteForceAI`
 - **Semeia:** `runtime-detection` (regras de detecção) e `qa-adversarial` (playbook de teste de auth). Ver `security/playbooks/auth-attack-defense.md`.
 - **O que puxar:** as **Blue Team Lessons** (detecção de parsing automatizado de login, timing randomizado = bot, padrão de spray, rate-limit que derruba multithread) + a **metodologia de ataque** (LLM lê o form → spray/brute via browser) para o red-team **autorizado** testar resistência de login.
-- **⚠️ Uso ético:** ferramenta ofensiva — só em **teste autorizado** (o mesmo enquadramento da auditoria que fizemos no Lunar). O valor pra nós é **defensivo** + red-team com escopo.
+- **⚠️ Uso ético:** ferramenta ofensiva — só em **teste autorizado** (autorização escrita do dono + escopo definido). O valor pra nós é **defensivo** + red-team com escopo.
 
 ### 3. awesome-ai-security-tools — `github.com/scadastrangelove/awesome-ai-security-tools`
 - **Semeia:** o agente `ai-agent-security` (proteger a camada de agente) **e a própria forja** (catálogo de ferramentas por concern).

@@ -1,5 +1,4 @@
 {
-  "$schema": "./docs/baseline.schema.json",
   "nome": "soberis-secure-baseline",
   "versao": "0.1.0",
   "descricao": "Base de segurança modular e ligável por pergunta. O setup filtra os módulos, os agentes e as skills conforme o tipo de projeto — nada de canhão para formiga.",
@@ -7,7 +6,7 @@
   "tiers": {
     "formiga": "Site/landing/estático ou ferramenta interna simples. Só o mínimo inegociável.",
     "padrao": "API + banco + usuários reais. O ponto ideal para a maioria dos projetos.",
-    "canhao": "Sistema crítico/financeiro/governo (tipo Lunar). Tudo ligado."
+    "canhao": "Sistema crítico (financeiro, governo, saúde, dado sensível). Tudo ligado."
   },
 
   "modulos": {
@@ -19,12 +18,12 @@
     "auth":               { "tier": "padrao",  "camada": "3 identidade",  "titulo": "Auth gerenciada (Clerk): JWT RS256, iss/azp/exp, JWKS fail-closed, webhook HMAC", "deps": [],           "agentes": ["sec-auth-webhooks"],                        "skills": [],                   "protocolos": ["04-AUTH-CLERK"] },
     "rbac-ownership":     { "tier": "padrao",  "camada": "4 autorização", "titulo": "Toda rota: auth+authz+escopo. Ownership na query. 404 anti-enumeração", "deps": ["auth"],           "agentes": ["sec-isolamento-acesso","appsec-go"],        "skills": ["appsec-go","go-reference"], "protocolos": ["01-RBAC-PERFIS","03-ISOLAMENTO-DADOS"] },
     "banco-minimo":       { "tier": "padrao",  "camada": "7 dados",       "titulo": "Papel de banco least-privilege (REVOKE DELETE/TRUNCATE), PgBouncer DISCARD ALL", "deps": [],             "agentes": ["appsec-go","sec-isolamento-acesso"],        "skills": ["appsec-go"],        "protocolos": ["03-ISOLAMENTO-DADOS","07-SOFT-DELETE-VERSIONAMENTO"] },
-    "observabilidade":    { "tier": "padrao",  "camada": "11 detecção",   "titulo": "Logs JSON com request_id + alerta em 5xx/auth-fail/429 (o que o Lunar esqueceu)", "deps": [],           "agentes": ["runtime-detection"],                        "skills": [],                   "protocolos": ["02-AUDITORIA-LOGS"] },
+    "observabilidade":    { "tier": "padrao",  "camada": "11 detecção",   "titulo": "Logs JSON com request_id + alerta em 5xx/auth-fail/429 (o erro mais comum: deixar pra depois)", "deps": [],           "agentes": ["runtime-detection"],                        "skills": [],                   "protocolos": ["02-AUDITORIA-LOGS"] },
 
     "auditoria":          { "tier": "canhao",  "camada": "8 auditoria",   "titulo": "Trilha append-only (role só-INSERT) → hash-chain via outbox", "deps": ["banco-minimo"],       "agentes": ["auditoria-logs"],                           "skills": [],                   "protocolos": ["02-AUDITORIA-LOGS","12-DUPLA-VALIDACAO-E-INTEGRIDADE"], "niveis": ["log-app","append-only","hash-chain"] },
     "stepup-2fa":         { "tier": "canhao",  "camada": "5 step-up",     "titulo": "2FA por operação crítica: TOTP cifrado / WebAuthn / e-mail-OTP", "deps": ["auth"],             "agentes": ["sec-auth-webhooks"],                        "skills": [],                   "protocolos": ["06-FLUXO-APROVACAO"] },
     "rbac-granular":      { "tier": "canhao",  "camada": "4 autorização", "titulo": "RBAC dinâmico modulo:recurso:acao, deny-vence, perfis sem programar", "deps": ["rbac-ownership"], "agentes": ["sec-isolamento-acesso"],                    "skills": [],                   "protocolos": ["01-RBAC-PERFIS"] },
-    "integridade-financeira": { "tier": "canhao","camada": "6 app",       "titulo": "Dinheiro em int64 centavos, zero float, validação cruzada", "deps": [],                     "agentes": ["integridade-financeira"],                   "skills": [],                   "protocolos": ["10-integridade"], "ligar_se": "lida_com_dinheiro" },
+    "integridade-financeira": { "tier": "canhao","camada": "6 app",       "titulo": "Dinheiro em int64 centavos, zero float, validação cruzada", "deps": [],                     "agentes": ["integridade-financeira"],                   "skills": [],                   "protocolos": ["12-DUPLA-VALIDACAO-E-INTEGRIDADE"], "ligar_se": "lida_com_dinheiro" },
     "lgpd":               { "tier": "canhao",  "camada": "0 governança",  "titulo": "Conformidade LGPD: bases legais, ROPA, retenção, incidente", "deps": [],                     "agentes": ["lgpd-compliance","compliance-geral"],       "skills": ["lgpd-gov"],         "protocolos": ["09-LGPD-COMPLIANCE"], "ligar_se": "lida_com_dado_pessoal" },
 
     "dfir":               { "tier": "padrao",  "camada": "11 resposta",   "titulo": "Resposta a incidente + forense (runbook detectar→conter→preservar→erradicar→lições)", "deps": ["observabilidade"], "agentes": ["dfir-incident-response"],                   "skills": [],                   "seed": "Digital-Forensics-Guide" },
@@ -48,7 +47,18 @@
     "protocolo": "detectar-stack → seed → aprofundar-web → compilar-com-procedência → forjar-skill → vetar(ai-agent-security+security-master+qa-adversarial) → cache",
     "seed_catalogs": "references/seed-catalogs.md",
     "template_skill": ".claude/skills/_TEMPLATE-SKILL.md",
-    "gate": "Nenhuma skill forjada é confiável sem procedência citada + dupla validação (regra 12)."
+    "gate": "Skill forjada nasce 'rascunho' e SÓ vira 'vetada' com: (a) procedência citada, (b) artefato de review em security/reviews/, (c) double-check por modelo de OUTRA família (regra 12). Sem os 3 → continua rascunho (fail-closed)."
+  },
+
+  "double_check": {
+    "principio": "Nenhuma conclusão de segurança vale com um cérebro só. Claude é autoritativo; outra família de modelo valida e REFUTA antes de confiar. Detalhe em docs/DOUBLE-CHECK.md.",
+    "autoritativo": "claude (ex.: fable nas tarefas críticas)",
+    "validadores": ["deepseek", "qwen", "glm", "kimi"],
+    "provedores": { "nvidia": "NVIDIA_API_KEY", "ollama": "OLLAMA_API_KEY" },
+    "regra_independencia": "o validador de uma peça NUNCA é da mesma família de quem a produziu",
+    "roda_em": ["gate da forja", "reviews/auditorias", "veredito Go/No-Go"],
+    "fail_closed": "sem chave de validador → peça fica rascunho e o relatório diz 'double-check indisponível'; nunca marcar validado sozinho",
+    "chaves_no_env": "só no .env local (gitignored); .env.example traz os nomes; NUNCA commitar valor"
   },
 
   "presets": {
